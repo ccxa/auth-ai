@@ -4,12 +4,11 @@ import shutil
 from face import compare_faces
 from utils import random_string
 import os
+from dotenv import load_dotenv
 
-
-# TODO: This path should be inside .env like file
-# TODO: This directory should automatically created when program starts
-storage_path = './temp/media/'
-random_string_length = 10
+load_dotenv('./.env')
+storage_path = os.getenv("STORAGE_PATH")
+random_string_length = int(os.getenv("RANDOM_STRING_LENGTH"))
 
 app = FastAPI()
 
