@@ -3,3 +3,5 @@ fasteners==0.14.1
 pytest==6.2.5
 uvicorn==0.21.0
 python-dotenv~=1.0.0
+httpx==0.24.0
+face-recognition-models==0.3.0
