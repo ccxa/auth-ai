@@ -15,6 +15,7 @@ app = FastAPI()
 
 @app.post("/get_file")
 async def get(image: UploadFile = File(...), video: UploadFile = File(...)):
+    # TODO: change methods name to post
     prefix = random_string(random_string_length)
 
     image_path = storage_path + prefix + image.filename
@@ -31,6 +32,18 @@ async def get(image: UploadFile = File(...), video: UploadFile = File(...)):
     os.remove(video_path)
 
     return {"status": comparing_result}
+
+
+@app.get("/hi")
+async def get():
+    """
+    Just returns a JSON response with the message "Hi !".
+    Use this endpoint to check if the app is running and accessible.
+
+    Returns:
+        dict: A JSON object with the message "Hi !".
+    """
+    return {"msg": 'Hi !'}
 
 
 if __name__ == "__main__":
