@@ -1,10 +1,10 @@
-import uvicorn
+import os
 from fastapi import FastAPI, File, UploadFile
+from dotenv import load_dotenv
 import shutil
+import uvicorn
 from face import compare_faces
 from utils import random_string
-import os
-from dotenv import load_dotenv
 
 load_dotenv('./.env')
 storage_path = os.getenv("STORAGE_PATH")
@@ -15,6 +15,19 @@ app = FastAPI()
 
 @app.post("/get_file")
 async def post(image: UploadFile = File(...), video: UploadFile = File(...)):
+    """
+        Receives an image and a video file by incoming post request,
+        compares the faces in both binary files,
+        and returns a boolean indicating whether they match.
+
+        Args:
+            image (UploadFile): The image file to be uploaded.
+            video (UploadFile): The video file to be uploaded.
+
+        Returns:
+            A dictionary containing the result of the face comparison
+            as a boolean value under the key 'status'.
+    """
     prefix = random_string(random_string_length)
 
     image_path = storage_path + prefix + image.filename
@@ -34,7 +47,7 @@ async def post(image: UploadFile = File(...), video: UploadFile = File(...)):
 
 
 @app.get("/hi")
-async def get():
+async def get() -> dict:
     """
     Just returns a JSON response with the message "Hi !".
     Use this endpoint to check if the app is running and accessible.
