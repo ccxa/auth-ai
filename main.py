@@ -14,8 +14,7 @@ app = FastAPI()
 
 
 @app.post("/get_file")
-async def get(image: UploadFile = File(...), video: UploadFile = File(...)):
-    # TODO: change methods name to post
+async def post(image: UploadFile = File(...), video: UploadFile = File(...)):
     prefix = random_string(random_string_length)
 
     image_path = storage_path + prefix + image.filename
