@@ -1,11 +1,26 @@
-import face_recognition
+import face_recognition as fr
 
 
-def compare_faces(source1, source2):
-    known_image = face_recognition.load_image_file(source1)
-    unknown_image = face_recognition.load_image_file(source2)
+def compare_faces(source1: str, source2: str) -> bool:
+    """
+    Compares the faces in two binary files and
+    returns a boolean value indicating whether they match.
 
-    known_encoding = face_recognition.face_encodings(known_image)[0]
-    unknown_encoding = face_recognition.face_encodings(unknown_image)[0]
+    Args:
+        source1 (str): The filename or path to the first binary file.
+        source2 (str): The filename or path to the second binary file.
 
-    return face_recognition.compare_faces([known_encoding], unknown_encoding)
+    Returns:
+        A bool value indicating whether the faces in the two files match.
+    """
+
+    # loading binary files from local
+    known_face = fr.load_image_file(source1)
+    unknown_face = fr.load_image_file(source2)
+    
+    # encoding loaded binary files
+    known_face_encoding = fr.face_encodings(known_face)[0]
+    unknown_face_encoding = fr.face_encodings(unknown_face)[0]
+
+    # Comparing faces in encoded binary files, then returning its result
+    return fr.compare_faces([known_face_encoding], unknown_face_encoding)
