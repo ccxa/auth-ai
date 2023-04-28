@@ -1,3 +1,7 @@
 /get_file
     POST:
-        - receives a photo and a video from client and stores them inside a directory.
+        - receives binary files from client to process them, then returns a json indicating its result.
+
+/hi
+    GET:
+        - receives an empty get request, returns json containing 'Hi!' message, to ensure app is working!
