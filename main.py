@@ -3,7 +3,7 @@ from fastapi import FastAPI, File, UploadFile
 from dotenv import load_dotenv
 import shutil
 import uvicorn
-from face import compare_faces
+from face_comparison import compare_faces
 from utils import random_string
 
 load_dotenv('./.env')
